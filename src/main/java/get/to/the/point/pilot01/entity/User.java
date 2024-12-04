@@ -19,10 +19,10 @@ public class User {
     @Column(nullable = false) // 필수 입력
     private String password;
 
-    @Column(name = "created_at", nullable = false, updatable = false) // 생성 시 자동 설정, 수정 불가
+    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP") // 생성 시 자동 설정
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP") // 수정 시 자동 설정
     private LocalDateTime updatedAt;
 
     @Column(nullable = false) // 회원 상태 필수

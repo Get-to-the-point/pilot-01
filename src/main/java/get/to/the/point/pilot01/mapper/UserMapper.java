@@ -1,5 +1,6 @@
 package get.to.the.point.pilot01.mapper;
 
+import get.to.the.point.pilot01.controller.UserUpdateDto;
 import get.to.the.point.pilot01.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -16,6 +17,6 @@ public interface UserMapper {
     User getUserById(Long id);
     User getUserByEmail(String email);
     void insertUser(User user);
-    void updateUser(User user);
+    void updateUser(Long id, UserUpdateDto user);
     void deleteUser(Long id);
 }

@@ -20,13 +20,12 @@
     </insert>
 
     <!-- 사용자 정보 업데이트 -->
-    <update id="updateUser" parameterType="get.to.the.point.pilot01.entity.User">
+    <update id="updateUser" parameterType="get.to.the.point.pilot01.controller.UserUpdateDto">
         UPDATE user
         SET
             name = #{name},
             email = #{email},
-            password = #{password},
-            updated_at = #{updatedAt}
+            password = #{password}
         WHERE
             id = #{id}
           AND is_active = true

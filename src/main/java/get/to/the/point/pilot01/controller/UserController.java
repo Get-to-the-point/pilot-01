@@ -2,10 +2,7 @@ package get.to.the.point.pilot01.controller;
 
 import get.to.the.point.pilot01.Service.UserService;
 import get.to.the.point.pilot01.entity.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -24,6 +21,11 @@ public class UserController {
 
     @PostMapping("/user")
     public Boolean createUser(User user) {
-        return userService.addUser(user);
+        return userService.createUser(user);
+    }
+
+    @PutMapping("/user/{id}")
+    public Boolean updateUser(UserUpdateDto user) {
+        return userService.updateUser(user);
     }
 }
