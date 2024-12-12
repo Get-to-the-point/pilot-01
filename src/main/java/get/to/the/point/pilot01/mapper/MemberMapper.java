@@ -4,23 +4,26 @@ import get.to.the.point.pilot01.dto.CreateMemberDto;
 import get.to.the.point.pilot01.dto.MemberVo;
 import get.to.the.point.pilot01.dto.UpdateMemberDto;
 import get.to.the.point.pilot01.entity.Member;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 @Mapper
 public interface MemberMapper {
-    // 직접 SQL을 작성하여 사용자 정보를 조회
-    @Select("SELECT * FROM member WHERE is_active = true")
-    List<Member> findAllMembers();
+
+    @Insert("INSERT INTO member (email, password, name) VALUES (#{email}, #{password}, #{name})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void insertMember(Member Member);
 
     @Select("SELECT * FROM member WHERE id = #{id}")
-    MemberVo findMemberById(Long id);
+    Member selectMemberById(Long id);
 
-    // MemberMapper.xml 파일에 SQL 정보가 있음
-    MemberVo findMemberByEmail(String email);
-    void insertMember(CreateMemberDto Member);
-    void updateMember(Long id, UpdateMemberDto Member);
-    void deleteMember(Long id);
+    @Select("SELECT * FROM member WHERE email = #{email}")
+    Member selectMemberByEmail(String email);
+
+    @Select("SELECT * FROM member")
+    List<Member> selectAll();
 }

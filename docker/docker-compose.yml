@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.4.3
+    container_name: mysql-pilot-01
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root # MySQL 루트 비밀번호
+      MYSQL_DATABASE: pilot-01         # 기본으로 생성할 데이터베이스
+    ports:
+      - "3311:3306"                    # 로컬 포트와 컨테이너 포트 매핑
+    volumes:
+      - mysql_data:/var/lib/mysql      # 데이터 영구 저장
+
+
+#        test
+  mysql-test:
+    image: mysql:8.4.3
+    container_name: mysql-pilot-01-test
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root # MySQL 루트 비밀번호
+      MYSQL_DATABASE: pilot-01         # 기본으로 생성할 데이터베이스
+    ports:
+      - "3312:3306"                    # 로컬 포트와 컨테이너 포트 매핑
+    volumes:
+      - mysql_data_test:/var/lib/mysql      # 데이터 영구 저장
+
+volumes:
+  mysql_data:
+  mysql_data_test:
