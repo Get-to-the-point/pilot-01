@@ -16,7 +16,7 @@ public interface MemberMapper {
 
     @Insert("INSERT INTO member (email, password, name) VALUES (#{email}, #{password}, #{name})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void insertMember(Member Member);
+    int insertMember(Member Member);
 
     @Select("SELECT * FROM member WHERE id = #{id}")
     Member selectMemberById(Long id);
