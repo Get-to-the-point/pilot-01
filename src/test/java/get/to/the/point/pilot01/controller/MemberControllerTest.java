@@ -36,6 +36,7 @@ class MemberControllerTest {
     @BeforeEach
     void setUp() {
         testMember = new Member(1L, "test@example.com", "Test User", "password123");
+        testResponseGetMember = new ResponseGetMember(1L, "test@example.com", "Test User");
     }
 
     @Test

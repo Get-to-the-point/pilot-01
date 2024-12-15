@@ -22,7 +22,7 @@ public class Board {
     @Column(name = "member_id", nullable = false, insertable = false, updatable = false)
     private Long memberId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
