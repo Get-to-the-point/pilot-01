@@ -3,6 +3,7 @@ package get.to.the.point.pilot01.Service;
 import get.to.the.point.pilot01.dto.ResponseGetMember;
 import get.to.the.point.pilot01.entity.Member;
 import get.to.the.point.pilot01.mapper.MemberMapper;
+import get.to.the.point.pilot01.repositorfy.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberMapper memberMapper;
+    private final MemberRepository memberRepository;
 
-    public MemberService(MemberMapper memberMapper) {
+    public MemberService(MemberMapper memberMapper, MemberRepository memberRepository) {
         this.memberMapper = memberMapper;
+        this.memberRepository = memberRepository;
     }
 
     // 회원 가입
@@ -55,5 +58,22 @@ public class MemberService {
             throw new IllegalArgumentException("존재하지 않는 회원입니다.");
         }
         memberMapper.updateMemberById(member);
+    }
+
+
+    ////// repository 사용
+    // 회원 가입
+    public void jpaInsertMember(Member member) {
+        memberRepository.save(member);
+    }
+
+    // 회원 조회 (ID로 단일 조회)
+    public Optional<Member> jpaSelectMemberById(Long id) {
+        return memberRepository.findById(id);
+    }
+
+    // 회원 조회 (이메일로 단일 조회)
+    public Optional<Member> jpaSelectMemberByEmail(String email) {
+        return memberRepository.findByEmail(email);
     }
 }
